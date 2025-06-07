@@ -1,22 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/namorados2.css">
-    <title>Dia dos namorados</title>
-</head>
-<body>
-  <div class="spotify-container">
-    <iframe src="https://open.spotify.com/embed/track/6DjKWVAqXUvMaAzO4U4CIo?utm_source=generator" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy">
-    </iframe>
-  </div>
-  
-  <div>
-    <img class="foto" src="https://img.freepik.com/fotos-premium/conceito-de-relacionamento-feliz-fotografia-vertical-casal-apaixonado-homem-e-mulher-ao-por-do-sol-de-maos-dadas_530736-32.jpg" alt="namorados">
-  </div>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/namorados2.css" />
+  <title>Dia dos namorados</title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="spotify-container">
+      <iframe src="https://open.spotify.com/embed/track/6DjKWVAqXUvMaAzO4U4CIo?utm_source=generator"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+      </iframe>
+    </div>
+
+    <section>
+      <div class="image-center">
+        <div class="image-wrapper">
+          <img class="foto" onclick="#" style="cursor: pointer;"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR51z34IX4NkTogn2vnwspncl0VrHwIOOnsJA&s"
+            alt="Descrição da Imagem" />
+
+          <div class="texto">
+            <h2 class="texto1">
+              ❤️Eu te amo ha:
+            </h2>
+            <div id="contador">Carregando...</div>
+
+            <script>
+              // Configurações personalizáveis
+              const config = {
+                dataInicial: '2023-01-01T00:00:00', // Data inicial do contador (ano-mês-diaThora:minuto:segundo)
+                textoInicial: '',     // Texto que aparece antes do contador
+                mostrarAnos: true,                  // Mostrar anos
+                mostrarMeses: true,                 // Mostrar meses
+                mostrarSemanas: true,               // Mostrar semanas
+                mostrarDias: true,                  // Mostrar dias
+                mostrarHoras: false,                // Mostrar horas
+                mostrarMinutos: true,               // Mostrar minutos
+                mostrarSegundos: true               // Mostrar segundos
+              };
+
+              function atualizarContador() {
+                const agora = new Date();
+                const dataInicial = new Date(config.dataInicial);
+                let diferenca = agora - dataInicial; // Diferença em milissegundos
+
+                // Calcula os componentes do tempo
+                const segundos = Math.floor(diferenca / 1000) % 60;
+                const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+                const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+                const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+
+                // Cálculos para semanas, meses e anos (aproximados)
+                const semanas = Math.floor(dias / 7) % 4;
+                const diasRestantes = dias % 7;
+                const meses = Math.floor(dias / 30) % 12;
+                const anos = Math.floor(dias / 365);
+
+                // Monta o texto do contador
+                let textoContador = config.textoInicial;
+
+                if (config.mostrarAnos && anos > 0) textoContador += `${anos} ano${anos !== 1 ? 's' : ''} `;
+                if (config.mostrarMeses && meses > 0) textoContador += `${meses} mes${meses !== 1 ? 'es' : ''} `;
+                if (config.mostrarSemanas && semanas > 0) textoContador += `${semanas} semana${semanas !== 1 ? 's' : ''} `;
+                if (config.mostrarDias && diasRestantes > 0) textoContador += `${diasRestantes} dia${diasRestantes !== 1 ? 's' : ''} `;
+                if (config.mostrarHoras && horas > 0) textoContador += `${horas} hora${horas !== 1 ? 's' : ''} `;
+                if (config.mostrarMinutos && minutos > 0) textoContador += `${minutos} minuto${minutos !== 1 ? 's' : ''} `;
+                if (config.mostrarSegundos) textoContador += `${segundos} segundo${segundos !== 1 ? 's' : ''}`;
+
+                document.getElementById('contador').textContent = textoContador.trim();
+              }
+
+              // Atualiza imediatamente e depois a cada segundo
+              atualizarContador();
+              setInterval(atualizarContador, 1000);
+            </script>
+          </div>
+        </div>
+    </section>
+  </div>
 </body>
+
 </html>
