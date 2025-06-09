@@ -19,10 +19,11 @@
     <section>
       <div class="image-center">
         <div class="image-wrapper">
-          <img class="foto" onclick="#" style="cursor: pointer;"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR51z34IX4NkTogn2vnwspncl0VrHwIOOnsJA&s"
-            alt="Descrição da Imagem" />
-
+          <img class="foto slider" onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'" style="cursor: pointer;"
+            src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2023/05/03/vertical_arrascaeta_flamengo__4_-22937992.jpg"
+            alt="Imagem 1" />
+          <img class="foto slider" onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'" style="cursor: pointer;"
+            src="https://i.pinimg.com/originals/a1/0a/3a/a10a3ad9a454faf1296ab4d9cc60317b.jpg" alt="Imagem 2" />
           <div class="texto">
             <h2 class="texto1">
               ❤️Eu te amo ha:
@@ -32,7 +33,7 @@
             <script>
               // Configurações personalizáveis
               const config = {
-                dataInicial: '1992-03-14T18:30:00', // Data inicial do contador (ano-mês-diaThora:minuto:segundo)
+                dataInicial: '2019-01-08T00:00:00', // Data inicial do contador (ano-mês-diaThora:minuto:segundo)
                 textoInicial: '',     // Texto que aparece antes do contador
                 mostrarAnos: true,                  // Mostrar anos
                 mostrarMeses: true,                 // Mostrar meses
@@ -77,6 +78,21 @@
               // Atualiza imediatamente e depois a cada segundo
               atualizarContador();
               setInterval(atualizarContador, 1000);
+
+              let slideIndex = 0;
+              const slides = document.querySelectorAll(".slider");
+
+              function showSlides() {
+                slides.forEach((slide) => {
+                  slide.style.display = "none";
+                });
+                slideIndex++;
+                if (slideIndex > slides.length) slideIndex = 1;
+                slides[slideIndex - 1].style.display = "block";
+                setTimeout(showSlides, 4000); // Troca a cada 4 segundos
+              }
+
+              if (slides.length > 0) showSlides();
             </script>
           </div>
         </div>

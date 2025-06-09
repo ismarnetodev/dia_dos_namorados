@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #5c5c5c;
+    background-color:#f9f9f9;
 }
 
 .main-container {
@@ -24,6 +24,7 @@ iframe {
     width: 100%;
     border-radius: 12px;
     border: 0;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */ /* pesquisar porque a borda fica grand */
 }
 
 .image-center {
@@ -46,6 +47,7 @@ iframe {
     width: 250px;
     height: auto;
     border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 section {
@@ -62,16 +64,17 @@ section {
 h2 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-style: unset;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     text-align: center;
     height: 15px;
+    
 }
 
 #contador {
     font-size: 24px;
     font-weight: bold;
     padding: 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     /* border-radius: 10px; */
     display: inline-block;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
