@@ -19,11 +19,15 @@
     <section>
       <div class="image-center">
         <div class="image-wrapper">
-          <img class="foto slider" onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'" style="cursor: pointer;"
+          <img class="foto slider"
+            onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'"
+            style="cursor: pointer;"
             src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2023/05/03/vertical_arrascaeta_flamengo__4_-22937992.jpg"
             alt="Imagem 1" />
-          <img class="foto slider" onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'" style="cursor: pointer;"
-            src="https://i.pinimg.com/originals/a1/0a/3a/a10a3ad9a454faf1296ab4d9cc60317b.jpg" alt="Imagem 2" />
+          <img class="foto slider"
+            onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'"
+            style="cursor: pointer;" src="https://i.pinimg.com/originals/a1/0a/3a/a10a3ad9a454faf1296ab4d9cc60317b.jpg"
+            alt="Imagem 2" />
           <div class="texto">
             <h2 class="texto1">
               ❤️Eu te amo ha:
@@ -93,6 +97,24 @@
               }
 
               if (slides.length > 0) showSlides();
+
+              function criarCoracao() {
+                const coracao = document.createElement('div');
+                coracao.classList.add('heart');
+                coracao.innerText = '❤️';
+
+                coracao.style.left = Math.random() * 100 + 'vw';
+                coracao.style.fontSize = (Math.random() * 20 + 10) + 'px';
+
+                document.body.appendChild(coracao);
+
+                setTimeout(() => {
+                  coracao.remove();
+                }, 5000); 
+              }
+
+              setInterval(criarCoracao, 300); 
+
             </script>
           </div>
         </div>
