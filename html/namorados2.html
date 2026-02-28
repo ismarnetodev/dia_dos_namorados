@@ -1,125 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/namorados2.css" />
-  <title>Dia dos namorados</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para você ❤️ | Dia dos Namorados</title>
+    <link rel="stylesheet" href="../css/namorados2.css" />
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-  <div class="main-container">
-    <div class="spotify-container">
-      <iframe src="https://open.spotify.com/embed/track/6DjKWVAqXUvMaAzO4U4CIo?utm_source=generator"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-      </iframe>
+    <!-- Corações flutuantes (gerados pelo JavaScript) -->
+    
+    <div class="main-container">
+        <!-- Header com navegação -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-heart"></i>
+                <span>Dia dos Namorados</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Voltar</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Conteúdo principal -->
+        <div class="content-wrapper">
+            <!-- Seção do Spotify -->
+            <div class="spotify-section">
+                <div class="section-header">
+                    <i class="fas fa-music"></i>
+                    <h2>Nossa Música</h2>
+                </div>
+                <div class="spotify-container glass-effect">
+                    <iframe src="https://open.spotify.com/embed/track/6DjKWVAqXUvMaAzO4U4CIo?utm_source=generator"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"
+                        title="Spotify Player">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Seção de Fotos e Contador -->
+            <div class="memories-section">
+                <div class="section-header">
+                    <i class="fas fa-camera-retro"></i>
+                    <h2>Nossas Memórias</h2>
+                </div>
+                
+                <div class="memories-grid">
+                    <!-- Cards de fotos clicáveis -->
+                    <div class="photo-card glass-effect" 
+                         onclick="window.open('https://www.tiktok.com/@xg.douxg/video/7508421184552176901', '_blank')">
+                        <div class="photo-wrapper">
+                            <img class="photo slider active"
+                                src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2023/05/03/vertical_arrascaeta_flamengo__4_-22937992.jpg"
+                                alt="Momento especial 1" />
+                            <img class="photo slider"
+                                src="https://i.pinimg.com/originals/a1/0a/3a/a10a3ad9a454faf1296ab4d9cc60317b.jpg"
+                                alt="Momento especial 2" />
+                        </div>
+                        <div class="photo-overlay">
+                            <i class="fas fa-play"></i>
+                            <span>Ver no TikTok</span>
+                        </div>
+                        <div class="photo-indicators">
+                            <span class="indicator active"></span>
+                            <span class="indicator"></span>
+                        </div>
+                    </div>
+
+                    <!-- Card do contador -->
+                    <div class="counter-card glass-effect">
+                        <div class="counter-icon">
+                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-heart heart-icon"></i>
+                        </div>
+                        <h3 class="counter-title">Eu te amo há:</h3>
+                        <div id="contador" class="counter-display">Carregando...</div>
+                        <div class="counter-decoration">
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer romântico -->
+        <footer class="footer">
+            <p>Feito com <i class="fas fa-heart"></i> para você</p>
+            <div class="footer-hearts">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+        </footer>
     </div>
 
-    <section>
-      <div class="image-center">
-        <div class="image-wrapper">
-          <img class="foto slider"
-            onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'"
-            style="cursor: pointer;"
-            src="https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2023/05/03/vertical_arrascaeta_flamengo__4_-22937992.jpg"
-            alt="Imagem 1" />
-          <img class="foto slider"
-            onclick="location.href='https:www.tiktok.com/@xg.douxg/video/7508421184552176901?q=edit%20arrascaeta&t=1749439960375'"
-            style="cursor: pointer;" src="https://i.pinimg.com/originals/a1/0a/3a/a10a3ad9a454faf1296ab4d9cc60317b.jpg"
-            alt="Imagem 2" />
-          <div class="texto">
-            <h2 class="texto1">
-              ❤️Eu te amo ha:
-            </h2>
-            <div id="contador">Carregando...</div>
+    <script>
+        // Configuração do contador
+        const config = {
+            dataInicial: '2019-01-08T00:00:00',
+            textoInicial: '',
+            mostrarAnos: true,
+            mostrarMeses: true,
+            mostrarSemanas: true,
+            mostrarDias: true,
+            mostrarHoras: false,
+            mostrarMinutos: true,
+            mostrarSegundos: true
+        };
 
-            <script>
-              // Configurações personalizáveis
-              const config = {
-                dataInicial: '2019-01-08T00:00:00', // Data inicial do contador (ano-mês-diaThora:minuto:segundo)
-                textoInicial: '',     // Texto que aparece antes do contador
-                mostrarAnos: true,                  // Mostrar anos
-                mostrarMeses: true,                 // Mostrar meses
-                mostrarSemanas: true,               // Mostrar semanas
-                mostrarDias: true,                  // Mostrar dias
-                mostrarHoras: false,                // Mostrar horas
-                mostrarMinutos: true,               // Mostrar minutos
-                mostrarSegundos: true               // Mostrar segundos
-              };
+        function atualizarContador() {
+            const agora = new Date();
+            const dataInicial = new Date(config.dataInicial);
+            let diferenca = agora - dataInicial;
 
-              function atualizarContador() {
-                const agora = new Date();
-                const dataInicial = new Date(config.dataInicial);
-                let diferenca = agora - dataInicial; // Diferença em milissegundos
+            const segundos = Math.floor(diferenca / 1000) % 60;
+            const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
+            const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
 
-                // Calcula os componentes do tempo
-                const segundos = Math.floor(diferenca / 1000) % 60;
-                const minutos = Math.floor(diferenca / (1000 * 60)) % 60;
-                const horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
-                const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const semanas = Math.floor(dias / 7);
+            const diasRestantes = dias % 7;
+            const meses = Math.floor(dias / 30.44); // Média de dias por mês
+            const anos = Math.floor(dias / 365.25); // Considerando anos bissextos
 
-                // Cálculos para semanas, meses e anos (aproximados)
-                const semanas = Math.floor(dias / 7) % 4;
-                const diasRestantes = dias % 7;
-                const meses = Math.floor(dias / 30) % 12;
-                const anos = Math.floor(dias / 365);
+            let textoContador = config.textoInicial;
+            let partes = [];
 
-                // Monta o texto do contador
-                let textoContador = config.textoInicial;
+            if (config.mostrarAnos && anos > 0) partes.push(`${anos} ${anos === 1 ? 'ano' : 'anos'}`);
+            if (config.mostrarMeses) {
+                let mesesRestantes = meses % 12;
+                if (mesesRestantes > 0) partes.push(`${mesesRestantes} ${mesesRestantes === 1 ? 'mês' : 'meses'}`);
+            }
+            if (config.mostrarSemanas) {
+                let semanasRestantes = Math.floor(diasRestantes / 7);
+                if (semanasRestantes > 0) partes.push(`${semanasRestantes} ${semanasRestantes === 1 ? 'semana' : 'semanas'}`);
+            }
+            if (config.mostrarDias) {
+                let diasFinal = diasRestantes % 7;
+                if (diasFinal > 0) partes.push(`${diasFinal} ${diasFinal === 1 ? 'dia' : 'dias'}`);
+            }
+            if (config.mostrarHoras && horas > 0) partes.push(`${horas} ${horas === 1 ? 'hora' : 'horas'}`);
+            if (config.mostrarMinutos && minutos > 0) partes.push(`${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`);
+            if (config.mostrarSegundos) partes.push(`${segundos} ${segundos === 1 ? 'segundo' : 'segundos'}`);
 
-                if (config.mostrarAnos && anos > 0) textoContador += `${anos} ano${anos !== 1 ? 's' : ''} `;
-                if (config.mostrarMeses && meses > 0) textoContador += `${meses} mes${meses !== 1 ? 'es' : ''} `;
-                if (config.mostrarSemanas && semanas > 0) textoContador += `${semanas} semana${semanas !== 1 ? 's' : ''} `;
-                if (config.mostrarDias && diasRestantes > 0) textoContador += `${diasRestantes} dia${diasRestantes !== 1 ? 's' : ''} `;
-                if (config.mostrarHoras && horas > 0) textoContador += `${horas} hora${horas !== 1 ? 's' : ''} `;
-                if (config.mostrarMinutos && minutos > 0) textoContador += `${minutos} minuto${minutos !== 1 ? 's' : ''} `;
-                if (config.mostrarSegundos) textoContador += `${segundos} segundo${segundos !== 1 ? 's' : ''}`;
+            textoContador = partes.join(', ');
+            document.getElementById('contador').textContent = textoContador || 'Menos de 1 segundo';
+        }
 
-                document.getElementById('contador').textContent = textoContador.trim();
-              }
+        // Slideshow
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slider");
+        const indicators = document.querySelectorAll(".indicator");
 
-              // Atualiza imediatamente e depois a cada segundo
-              atualizarContador();
-              setInterval(atualizarContador, 1000);
+        function showSlides() {
+            slides.forEach((slide) => {
+                slide.classList.remove("active");
+            });
+            indicators.forEach((ind) => {
+                ind.classList.remove("active");
+            });
+            
+            slideIndex++;
+            if (slideIndex > slides.length) slideIndex = 1;
+            
+            slides[slideIndex - 1]?.classList.add("active");
+            indicators[slideIndex - 1]?.classList.add("active");
+            
+            setTimeout(showSlides, 4000);
+        }
 
-              let slideIndex = 0;
-              const slides = document.querySelectorAll(".slider");
+        if (slides.length > 0) showSlides();
 
-              function showSlides() {
-                slides.forEach((slide) => {
-                  slide.style.display = "none";
-                });
-                slideIndex++;
-                if (slideIndex > slides.length) slideIndex = 1;
-                slides[slideIndex - 1].style.display = "block";
-                setTimeout(showSlides, 4000); // Troca a cada 4 segundos
-              }
+        // Corações flutuantes
+        function criarCoracao() {
+            const coracao = document.createElement('div');
+            coracao.classList.add('heart');
+            coracao.innerHTML = '❤️';
+            coracao.style.left = Math.random() * 100 + '%';
+            coracao.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            coracao.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            coracao.style.opacity = Math.random() * 0.5 + 0.3;
+            document.body.appendChild(coracao);
 
-              if (slides.length > 0) showSlides();
+            setTimeout(() => {
+                coracao.remove();
+            }, 7000);
+        }
 
-              function criarCoracao() {
-                const coracao = document.createElement('div');
-                coracao.classList.add('heart');
-                coracao.innerText = '❤️';
+        // Inicia os corações flutuantes
+        for(let i = 0; i < 5; i++) {
+            setTimeout(criarCoracao, i * 200);
+        }
+        setInterval(criarCoracao, 400);
 
-                coracao.style.left = Math.random() * 100 + 'vw';
-                coracao.style.fontSize = (Math.random() * 20 + 10) + 'px';
-
-                document.body.appendChild(coracao);
-
-                setTimeout(() => {
-                  coracao.remove();
-                }, 5000); 
-              }
-
-              setInterval(criarCoracao, 300); 
-
-            </script>
-          </div>
-        </div>
-    </section>
-  </div>
+        // Atualiza o contador
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+    </script>
 </body>
-
 </html>
