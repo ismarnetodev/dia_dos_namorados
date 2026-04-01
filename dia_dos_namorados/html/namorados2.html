@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Para você ❤️ | Dia dos Namorados</title>
+    <link rel="stylesheet" href="../css/namorados2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Canvas de estrelas/partículas -->
+<canvas id="particle-canvas"></canvas>
+
+<div class="main-container">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-heart"></i>
+            <span>Dia dos Namorados</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html" class="nav-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo -->
+    <div class="content-wrapper">
+
+        <!-- Spotify -->
+        <div class="spotify-section">
+            <div class="section-header">
+                <i class="fas fa-music"></i>
+                <h2>Nossa Música</h2>
+            </div>
+            <div class="spotify-container">
+                <iframe
+                    data-testid="embed-iframe"
+                    src="https://open.spotify.com/embed/track/2r5XX3V7abc7rBRNKyA2M3?utm_source=generator"
+                    width="100%" height="152" frameBorder="0"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+
+        <!-- Memórias -->
+        <div class="memories-section">
+            <div class="section-header">
+                <i class="fas fa-camera-retro"></i>
+                <h2>Nossas Memórias</h2>
+            </div>
+
+            <div class="memories-grid">
+
+                <!-- Slideshow + vídeo -->
+                <div class="photo-card" onclick="openModal()">
+                    <div class="photo-wrapper">
+                        <img class="photo slider active" src="../imagens/eu_clara1.jpeg" alt="Momento especial 1" />
+                        <img class="photo slider"        src="../imagens/eu_clara2.jpeg" alt="Momento especial 2" />
+                        <img class="photo slider"        src="../imagens/eu_clara3.jpeg" alt="Momento especial 3" />
+                        <img class="photo slider"        src="../imagens/eu_clara4.jpeg" alt="Momento especial 4" />
+                        <img class="photo slider"        src="../imagens/eu_clara5.jpeg" alt="Momento especial 5" />
+                        <img class="photo slider"        src="../imagens/eu_clara6.jpeg" alt="Momento especial 6" />
+                    </div>
+                    <div class="photo-overlay">
+                        <div class="play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <span>Ver vídeo</span>
+                    </div>
+                    <div class="photo-indicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                </div>
+
+                <!-- Contador -->
+                <div class="counter-card">
+                    <div class="counter-icon">
+                        <i class="fas fa-infinity"></i>
+                        <i class="fas fa-heart heart-icon"></i>
+                    </div>
+                    <h3 class="counter-title">Eu te amo há</h3>
+                    <div id="contador" class="counter-display">Carregando...</div>
+                    <div class="counter-decoration">
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Feito com <i class="fas fa-heart"></i> para o meu jasmim</p>
+        <div class="footer-hearts">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+        </div>
+    </footer>
+</div>
+
+<!-- Modal vídeo -->
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()" aria-label="Fechar">&times;</span>
+        <video id="modalVideo" controls playsinline>
+            <source src="../video/eu_clara_forro.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </div>
+</div>
+
+<script>
+/* ─── CANVAS DE ESTRELAS ───────────────────────────────────────── */
+(function() {
+    const canvas = document.getElementById('particle-canvas');
+    const ctx    = canvas.getContext('2d');
+    let W, H, stars = [], sparkles = [];
+
+    function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+
+    function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+    // estrelas fixas
+    function initStars() {
+        stars = [];
+        const count = Math.floor(W * H / 6000);
+        for (let i = 0; i < count; i++) {
+            stars.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: randBetween(0.4, 1.4),
+                alpha: randBetween(0.1, 0.6),
+                speed: randBetween(0.002, 0.006),
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+    }
+
+    // partículas rosa flutuantes
+    function spawnSparkle() {
+        sparkles.push({
+            x: Math.random() * W,
+            y: H + 20,
+            r: randBetween(1.5, 4),
+            alpha: randBetween(0.4, 0.85),
+            vx: randBetween(-0.5, 0.5),
+            vy: randBetween(-0.6, -1.6),
+            color: Math.random() < 0.5 ? '#e8a0a0' : '#d4af7a',
+            life: 1
+        });
+    }
+
+    let frame = 0;
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        // estrelas
+        const t = frame * 0.01;
+        stars.forEach(s => {
+            const a = s.alpha * (0.6 + 0.4 * Math.sin(t * s.speed * 100 + s.phase));
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(240,217,176,${a})`;
+            ctx.fill();
+        });
+
+        // sparkles
+        sparkles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= 0.008;
+            p.alpha = p.life * 0.85;
+            if (p.life <= 0) { sparkles.splice(i, 1); return; }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        });
+
+        if (frame % 8 === 0 && sparkles.length < 60) spawnSparkle();
+        frame++;
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    initStars();
+    draw();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+})();
+
+/* ─── CORAÇÕES FLUTUANTES ──────────────────────────────────────── */
+const emojis = ['❤️','🌹','💕','✨','💖'];
+function criarCoracao() {
+    const el = document.createElement('div');
+    el.classList.add('heart');
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left              = Math.random() * 96 + 'vw';
+    el.style.animationDuration = (Math.random() * 4 + 5) + 's';
+    el.style.fontSize          = (Math.random() * 18 + 12) + 'px';
+    el.style.opacity           = Math.random() * 0.5 + 0.25;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 9000);
+}
+for (let i = 0; i < 6; i++) setTimeout(criarCoracao, i * 300);
+setInterval(criarCoracao, 500);
+
+/* ─── CONTADOR ─────────────────────────────────────────────────── */
+const config = {
+    dataInicial: '2026-01-09T00:00:00',
+    mostrarAnos: true, mostrarMeses: true, mostrarSemanas: true,
+    mostrarDias: true, mostrarHoras: false, mostrarMinutos: true,
+    mostrarSegundos: true
+};
+
+function atualizarContador() {
+    const diff = new Date() - new Date(config.dataInicial);
+    const totalS = Math.floor(diff / 1000);
+    const segundos = totalS % 60;
+    const totalM   = Math.floor(totalS / 60);
+    const minutos  = totalM % 60;
+    const totalH   = Math.floor(totalM / 60);
+    const totalD   = Math.floor(totalH / 24);
+    const anos     = Math.floor(totalD / 365.25);
+    const dA       = totalD - Math.floor(anos * 365.25);
+    const meses    = Math.floor(dA / 30.44);
+    const dM       = Math.floor(dA - meses * 30.44);
+    const semanas  = Math.floor(dM / 7);
+    const diasF    = dM % 7;
+
+    const partes = [];
+    if (config.mostrarAnos    && anos    > 0) partes.push(`${anos} ${anos===1?'ano':'anos'}`);
+    if (config.mostrarMeses   && meses   > 0) partes.push(`${meses} ${meses===1?'mês':'meses'}`);
+    if (config.mostrarSemanas && semanas > 0) partes.push(`${semanas} ${semanas===1?'semana':'semanas'}`);
+    if (config.mostrarDias    && diasF   > 0) partes.push(`${diasF} ${diasF===1?'dia':'dias'}`);
+    if (config.mostrarMinutos && minutos > 0) partes.push(`${minutos} ${minutos===1?'minuto':'minutos'}`);
+    if (config.mostrarSegundos)               partes.push(`${segundos} ${segundos===1?'segundo':'segundos'}`);
+
+    document.getElementById('contador').textContent = partes.join(', ') || 'Menos de 1 segundo';
+}
+atualizarContador();
+setInterval(atualizarContador, 1000);
+
+/* ─── SLIDESHOW ────────────────────────────────────────────────── */
+const slides     = document.querySelectorAll('.slider');
+const indicators = document.querySelectorAll('.indicator');
+let slideIndex   = 0;
+
+function showSlide() {
+    slides.forEach(s => s.classList.remove('active'));
+    indicators.forEach(i => i.classList.remove('active'));
+    slides[slideIndex]?.classList.add('active');
+    indicators[slideIndex]?.classList.add('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+}
+if (slides.length) { showSlide(); setInterval(showSlide, 4000); }
+
+/* ─── MODAL ────────────────────────────────────────────────────── */
+function openModal() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    video.play();
+}
+
+function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('modalVideo');
+    video.pause();
+    video.currentTime = 0;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+window.addEventListener('click', e => {
+    if (e.target === document.getElementById('videoModal')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

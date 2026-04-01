@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+        /* ── TOKENS ─────────────────────────────────────────────────────── */
+        :root {
+            --rose:       #e8a0a0;
+            --rose-deep:  #c0607a;
+            --gold:       #d4af7a;
+            --gold-soft:  #f0d9b0;
+            --ink:        #0d0810;
+            --ink-mid:    #1a1020;
+            --ink-light:  #251830;
+            --mist:       rgba(255,255,255,0.05);
+            --mist-2:     rgba(255,255,255,0.10);
+            --border:     rgba(212,175,122,0.18);
+            --shadow-rose: 0 0 60px rgba(192,96,122,0.22);
+            --shadow-gold: 0 0 40px rgba(212,175,122,0.15);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body:    'Jost', sans-serif;
+            --ease-silk:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ── RESET ───────────────────────────────────────────────────────── */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { font-size:16px; scroll-behavior:smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--ink);
+            color: #e8e0f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        /* Canvas de estrelas */
+        #particle-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── MAIN CONTENT ──────────────────────────────────────────────── */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+            padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+            background: var(--mist);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.5), var(--shadow-gold);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeUp 1s var(--ease-silk) both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212,175,122,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Decoração de corações */
+        .heart-decoration {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .heart-decoration i {
+            color: var(--rose);
+            filter: drop-shadow(0 0 8px rgba(232,160,160,0.5));
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .heart-decoration i:nth-child(1), .heart-decoration i:nth-child(3) {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation-delay: 0.5s;
+        }
+
+        .heart-decoration i:nth-child(2) {
+            font-size: 2rem;
+            color: var(--gold);
+            filter: drop-shadow(0 0 12px rgba(212,175,122,0.6));
+        }
+
+        /* Título */
+        .title {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .title-line {
+            display: block;
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: #e8e0f0;
+            text-transform: uppercase;
+        }
+
+        .title-line.highlight {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--gold-soft);
+            text-shadow: 0 2px 20px rgba(212,175,122,0.3);
+            text-transform: none;
+            letter-spacing: 0.02em;
+            margin: 5px 0;
+        }
+
+        /* Subtítulo */
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: rgba(232, 224, 240, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Botão */
+        .button-form {
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            position: relative;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(212,175,122,0.08);
+            border: 1px solid rgba(212,175,122,0.4);
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s var(--ease-silk);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: rgba(212,175,122,0.15);
+            border-color: var(--gold);
+            color: var(--gold-soft);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212,175,122,0.25);
+        }
+
+        .btn-primary i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Animações */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        /* Corações emoji flutuantes via JS */
+        .heart {
+            position: fixed;
+            bottom: -10vh;
+            pointer-events: none;
+            z-index: 100;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-110vh) rotate(360deg); }
+        }
