@@ -21,7 +21,11 @@
             <span>Dia dos Namorados</span>
         </div>
         <div class="nav-links">
-            <a href="../index.html" class="nav-link">
+            <button class="nav-link poem-button" onclick="openPoemModal()">
+                <i class="fas fa-book-open"></i>
+                <span>Poema</span>
+            </button>
+            <a href="/index.html" class="nav-link">
                 <i class="fas fa-arrow-left"></i>
                 <span>Voltar</span>
             </a>
@@ -67,6 +71,9 @@
                         <img class="photo slider"        src="../imagens/eu_clara4.jpeg" alt="Momento especial 4" />
                         <img class="photo slider"        src="../imagens/eu_clara5.jpeg" alt="Momento especial 5" />
                         <img class="photo slider"        src="../imagens/eu_clara6.jpeg" alt="Momento especial 6" />
+                        <img class="photo slider"        src="../imagens/eu_clara7.jpeg" alt="Momento especial 7" />
+                        <img class="photo slider"        src="../imagens/eu_clara8.jpeg" alt="Momento especial 8" />
+                        <img class="photo slider"        src="../imagens/eu_clara9.jpeg" alt="Momento especial 9" />
                     </div>
                     <div class="photo-overlay">
                         <div class="play-btn">
@@ -76,6 +83,9 @@
                     </div>
                     <div class="photo-indicators">
                         <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
                         <span class="indicator"></span>
                         <span class="indicator"></span>
                         <span class="indicator"></span>
@@ -122,6 +132,46 @@
             <source src="../video/eu_clara_forro.mp4" type="video/mp4">
             Seu navegador não suporta vídeo.
         </video>
+    </div>
+</div>
+
+<!-- Modal Poema -->
+<div id="poemModal" class="poem-modal">
+    <div class="poem-modal-content">
+        <span class="poem-close" onclick="closePoemModal()">&times;</span>
+        
+        <div class="poem-header">
+            <div class="poem-icon">
+                <i class="fas fa-seedling"></i>
+            </div>
+            <h2 class="poem-title">Meu Jasmim</h2>
+            <p class="poem-subtitle">Para você</p>
+        </div>
+
+        <div class="poem-divider"></div>
+
+        <div class="poem-text">
+            <p>Esses teus cabelos negros e esse teu cheiro de jasmim,<br>
+            já mostram quem tu és pra mim,<br>
+            a representação do amor sem fim,<br>
+            flor mais bonita do meu jardim.</p>
+
+            <p>Teus olhos castanhos têm doçura de um jasmim,<br>
+            a coisa mais pura que nasceu pra mim,<br>
+            teu sorriso é farol a brilhar assim,<br>
+            iluminando a verdade dentro de mim.</p>
+
+            <p>Sem essa flor no meu jardim, vem o desatino,<br>
+            fico perdido, jogado ao próprio destino,<br>
+            sem rumo na vida, coração em desatino,<br>
+            vivendo sem sonho, sem querer, sem tino.</p>
+        </div>
+
+        <div class="poem-decoration">
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+        </div>
     </div>
 </div>
 
@@ -275,7 +325,7 @@ function showSlide() {
 }
 if (slides.length) { showSlide(); setInterval(showSlide, 4000); }
 
-/* ─── MODAL ────────────────────────────────────────────────────── */
+/* ─── MODAL VÍDEO ──────────────────────────────────────────────── */
 function openModal() {
     const modal = document.getElementById('videoModal');
     const video = document.getElementById('modalVideo');
@@ -293,10 +343,29 @@ function closeModal() {
     document.body.style.overflow = '';
 }
 
+/* ─── MODAL POEMA ──────────────────────────────────────────────── */
+function openPoemModal() {
+    const modal = document.getElementById('poemModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closePoemModal() {
+    const modal = document.getElementById('poemModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
 window.addEventListener('click', e => {
     if (e.target === document.getElementById('videoModal')) closeModal();
+    if (e.target === document.getElementById('poemModal')) closePoemModal();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { 
+    if (e.key === 'Escape') {
+        closeModal();
+        closePoemModal();
+    }
+});
 </script>
 </body>
 </html>
